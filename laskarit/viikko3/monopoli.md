@@ -22,17 +22,17 @@ classDiagram
     Pelaaja "1" -- "0..22" Katu
     <<Abstract>> Ruutu
     class Ruutu {
-        +int sijainti
-        +toiminto()
+        int sijainti
+        toiminto()
     }
     class Kortti {
-        +toiminto()
+        toiminto()
     }
     class Pelaaja {
-        +int rahaa
+        int rahaa
     }
     class Katu {
-        +int talot
-        +int hotellit
+        int talot
+        int hotellit
     }
 ```
