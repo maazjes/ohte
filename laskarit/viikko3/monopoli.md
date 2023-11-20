@@ -5,7 +5,6 @@ classDiagram
     Pelilauta "1" -- "40" Ruutu
     Ruutu "1" -- "1" Ruutu : seuraava
     Ruutu "1" -- "0..8" Pelinappula
-    Ruutu "1" -- "1" Tyyppi
     Aloitusruutu --|> Ruutu
     Vankila --|> Ruutu
     Sattuma --|> Ruutu
