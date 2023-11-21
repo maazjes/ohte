@@ -1,3 +1,3 @@
 ## Viikko 3
 
--Sudokun generointi ja tarkistus toimivat
+-Lisätty Sudoku-luokka, joka luo satunnaisen sudokun ja tarkistaa tarvittaessa itsensä.
