@@ -8,10 +8,10 @@ class Sudoku:
         else:
             self.board = generate_sudoku(base, empty_cells)
 
-    def cell_is_valid(self, row, col):
+    def cell_is_valid(self, row, col, num):
         # Check if the number placed in the given row and column is valid
         for i in range(9):
-            if self.board[row][i] == self.board[row][col] or self.board[i][col] == self.board[row][col] or self.board[3 * (row // 3) + i // 3][3 * (col // 3) + i % 3] == self.board[row][col]:
+            if self.board[row][i] == num or self.board[i][col] == num or self.board[3 * (row // 3) + i // 3][3 * (col // 3) + i % 3] == num:
                 return False
         return True
 
@@ -22,13 +22,12 @@ class Sudoku:
                 if self.board[i][j] == 0:
                     # Try placing a number in the empty cell
                     for num in range(1, 10):
-                        self.board[i][j] = num
-                        if self.cell_is_valid(i, j):
+                        if self.cell_is_valid(i, j, num):
+                            self.board[i][j] = num
                             # Recursively try to solve the rest of the sudoku
                             if self.solve():
                                 return True
                             # If placing the number doesn't lead to a solution, backtrack
-                        else:
                             self.board[i][j] = 0
                     return False
         return True
