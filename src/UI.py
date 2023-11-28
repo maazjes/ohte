@@ -8,7 +8,7 @@ class UI(tk.Frame):
         tk.Frame.__init__(self, master)
         self.logic = logic
         self.entry_values = [[tk.StringVar(
-            value=self.logic.board[i][j] if self.logic.board[i][j] != 0 else '') for i in range(9)] for j in range(9)]
+            value=self.logic.board[j][i] if self.logic.board[j][i] != 0 else '') for i in range(9)] for j in range(9)]
         self.cells = {}
         self.create_grid()
         self.bind('<Configure>', self.on_window_resize)

@@ -12,7 +12,6 @@ class Sudoku:
 
     def validate(self):
         bad_rows = [row for row in self.board if not sum(row) == sum(set(row))]
-        print(self)
         cols = list(zip(*self.board))
         bad_cols = [col for col in cols if not sum(col) == sum(set(col))]
         squares = []
