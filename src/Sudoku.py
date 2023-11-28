@@ -1,5 +1,5 @@
-from helpers import generate_sudoku
 import itertools
+from helpers import generate_sudoku
 
 
 class Sudoku:
@@ -9,14 +9,6 @@ class Sudoku:
             self.board = board
         else:
             self.board = generate_sudoku(base, empty_cells)
-
-    def cell_is_valid(self, row, col):
-        # Check if the number placed in the given row and column is valid
-        num = self.board[row][col]
-        for i in range(9):
-            if (self.board[row][i] == num and (row, i) != (row, col)) or (self.board[i][col] == num and (i, col) != (row, col)) or (self.board[3 * (row // 3) + i // 3][3 * (col // 3) + i % 3] == num and (3 * (row // 3) + i // 3, 3 * (col // 3) + i % 3) != (row, col)):
-                return False
-        return True
 
     def validate(self):
         bad_rows = [row for row in self.board if not sum(row) == sum(set(row))]

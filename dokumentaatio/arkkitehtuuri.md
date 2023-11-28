@@ -6,7 +6,6 @@ classDiagram
         on_entry_change()
     }
     class Sudoku{
-        cell_is_valid()
         validate()
     }
     UI --|> Sudoku
