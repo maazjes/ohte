@@ -2,7 +2,7 @@
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)  
 [Changelog](dokumentaatio/changelog.md)  
-[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)  
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
