@@ -1,3 +1,9 @@
+# Sudoku
+
+Sovellus generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero.
+Generoitavien sudokujen vaikeustasoa voi muuttaa muuttamalla tyhjien ruutujen määrää.
+
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)  

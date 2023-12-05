@@ -4,6 +4,6 @@ Sovellus generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkais
 
 ## Toiminnallisuudet
 
-- Vaikeustason muuttaminen
-- Ratkaisun automaattinen tarkistus
-- Ruutuun numeron lisääminen numeronäppäimillä
+- Vaikeustason muuttaminen (tehty)
+- Ratkaisun automaattinen tarkistus (tehty)
+- Ruutuun numeron lisääminen numeronäppäimillä (tehty)
