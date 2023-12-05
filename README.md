@@ -9,7 +9,7 @@ Generoitavien sudokujen vaikeustasoa voi muuttaa muuttamalla tyhjien ruutujen m�
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)  
 [Changelog](dokumentaatio/changelog.md)  
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)  
-[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)  
 [Releases](https://github.com/maazjes/ohte/releases/tag/viikko5)
 
 ## Asennus
