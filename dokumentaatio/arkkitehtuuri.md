@@ -39,10 +39,9 @@ Sudoku-käyttöliittymä koostuu seuraavista näkymistä:
 ### Sovelluslogiikka
 Sovelluslogiikan muodostaa Sudoku-luokka, joka hallinnoi pelin tilaa ja sääntöjen noudattamista. Luokka tarjoaa metodit kuten:  
 
-- initialize_game(): Alustaa uuden pelin asetetulla vaikeustasolla.
-- update_cell(row, col, value): Päivittää solun arvon ja tarkistaa sääntöjenmukaisuuden.
-- check_solution(): Tarkistaa, onko koko peliruudukko täytetty oikein.
-- Sudoku-luokka käyttää apuna Helpers-pakkauksen funktioita, kuten ruudukon generointia ja tarkistuslogiikkaa.
+- generate_sudoku(): Luo random Sudokun.
+- validate(): Tarkistaa, onko koko peliruudukko täytetty oikein.
+- set_empty_cells(): Asettaa Sudokuun halutun määrän tyhjiä ruutuja.
 
 ## Tietojen pysyväistallennus
 Sovellus ei tässä vaiheessa sisällä tietojen pysyväistallennusta, mutta arkkitehtuuri on suunniteltu tukemaan laajennuksia, kuten pelaajien tilastojen tallennusta tai pelitilanteiden tallentamista myöhempää jatkamista varten.
