@@ -13,7 +13,7 @@
 ## Viikko 6
 
 - Base-valinta toimii
-- Käyttäjä ei voi lisätä vääriä lukuja ruutuihin
+- Käyttäjä ei voi nyt lisätä vääriä lukuja ruutuihin
 - Pienemmät ruudukot erotettu isommasta ruudukosta
 - Painike uuden satunnaisen Sudokun generoimiseksi
 - Kun käyttäjä on ratkaissut Sudokun, hän saa palautetta sen oikeellisuudesta uudessa ikkunassa
