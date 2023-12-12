@@ -16,3 +16,16 @@ classDiagram
     }
     UI --|> Sudoku
 ```
+
+```mermaid
+sequenceDiagram
+    participant K as Käyttäjä
+    participant UI as UI
+    participant G as Sudoku
+
+    K->>UI: Syöttää numeron ruutuun
+    UI->>G: Päivittää numeron pelilogiikkaan
+    G->>G: Tarkistaa pelitilanteen
+    G-->>UI: Ilmoittaa muutoksesta / tilasta
+    UI->>UI: Päivittää ruudun näytöllä
+```

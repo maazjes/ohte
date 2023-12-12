@@ -5,10 +5,6 @@ from UI import UI
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Sudoku")
-    root.minsize(200, 200)
-
     ui = UI(root, Sudoku())
-
     ui.pack(expand=True, fill='both')
-
     root.mainloop()
