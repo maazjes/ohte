@@ -1,8 +1,6 @@
 # Vaatimusmäärittely
 
-Sovellus generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero.
-Käyttäjä voi myös vaihtaa generoitavien sudokujen vaikeustasoa ja kokoa. Vaikeustasoa voi vaihtaa vaihtamalla tyhjien ruutujen määrää.
-Lisäksi kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen määräksi 90.
+Sovellus generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero. Käyttäjä voi myös vaihtaa generoitavien sudokujen vaikeustasoa ja kokoa. Vaikeustasoa voi vaihtaa vaihtamalla tyhjien ruutujen määrää. Lisäksi kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen määräksi 90.
 
 ## Toiminnallisuudet
 

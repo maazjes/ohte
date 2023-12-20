@@ -77,7 +77,7 @@ class UI(tk.Frame):
         self.create_grid()
         self.update()
 
-    def create_settings_window(self) -> None:
+    def create_settings(self) -> None:
         """
         Creates a settings window with additional settings for the Sudoku game.
 
@@ -226,7 +226,7 @@ class UI(tk.Frame):
         self.stats_window.title("Stats")
 
         tree = ttk.Treeview(self.stats_window)
-        tree["columns"] = ("Time", "Moves", "Empty Cells")
+        tree["columns"] = ("Time", "Moves", "Empty cells")
         tree.column("#0", width=0, stretch=tk.NO)
         tree.heading("#0", text="", anchor=tk.W)
 
@@ -256,7 +256,7 @@ class UI(tk.Frame):
         if not self.settings_window or not tk.Toplevel.winfo_exists(
             self.settings_window
         ):
-            self.create_settings_window()
+            self.create_settings()
         else:
             self.settings_window.lift()
 
