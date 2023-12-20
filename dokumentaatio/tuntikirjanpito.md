@@ -7,5 +7,6 @@
 | 28.11. | 10 | Käyttöliittymän tekeminen ja yhdistäminen ohjelman logiikkaan. Sudokun tarkistamisen tekeminen ja implementointi käyttöliittymään. |
 | 5.12. | 9 | Käyttöliittymään asetuspaneeli, josta voi vaihtaa tyhjien ruutujen määrää sudokussa. |
 | 12.12. | 12 | Base-valinnan korjaus, väärien lukujen estämisen lisääminen, selkeämpi ruudukko, uusien Sudokuiden generoiminen painikkeella ja palaute Sudokun oikeellisuudesta |
+| 20.12. | 10 | Tietokannan implementointi, testien tekeminen, docstringin viimeistely ja dokumentaation viimeistely |
 
-Yhteensä: 36.2 tuntia
+Yhteensä: 46.2 tuntia
