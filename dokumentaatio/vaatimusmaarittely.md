@@ -16,6 +16,6 @@ Lisäksi kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole 
 
 ## Jatkokehitysideoita
 
-- [] Vaikeustason määrittely monipuolisemmin, kun pelkän tyhjien ruutujen lukumäärän perusteella.
-- [] Käyttäjän luominen ja sijoitusten ylläpito verrattuna muihin käyttäjiin tulostaululla.
-- [] Sudokun ratkaisija, joka ratkaisee Sudokun ja visualisoi ratkaisuprosessin.
+- [ ] Vaikeustason määrittely monipuolisemmin, kun pelkän tyhjien ruutujen lukumäärän perusteella.
+- [ ] Käyttäjän luominen ja sijoitusten ylläpito verrattuna muihin käyttäjiin tulostaululla.
+- [ ] Sudokun ratkaisija, joka ratkaisee Sudokun ja visualisoi ratkaisuprosessin.
