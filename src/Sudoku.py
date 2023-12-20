@@ -153,7 +153,7 @@ class Sudoku:
             number (int): The number to insert into the board.
 
         Returns:
-            bool: True if the board is full.
+            bool: True if the number inserted fits the Sudoku.
         """
         self.moves += 1
         valid = self.cell_is_valid(row, col, num)
