@@ -95,7 +95,7 @@ sequenceDiagram
 ### Tyhjien ruutujen lukumäärän muuttaminen
 Kun käyttäjä muuttaa Sudokussa olevien tyhjien ruutujen lukumäärää, sovelluksen kontrolli etenee seuraavasti:  
 
-mermaid```
+```mermaid
 sequenceDiagram
     participant User as Käyttäjä
     participant UI as Käyttöliittymä
