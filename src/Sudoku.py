@@ -30,6 +30,33 @@ class Sudoku:
         self.moves = 0
         self.set_empty_cells(self.empty_cells)
 
+    def cell_is_valid(self, row: int, col: int, num: int) -> bool:
+        """
+        Check if a given number in a given cell is valid according to Sudoku rules.
+
+        Args:
+            row (int): Row index of the cell.
+            col (int): Column index of the cell.
+            num (int): Number to check in the cell.
+
+        Returns:
+            bool: True if the cell is valid, False otherwise.
+        """
+
+        start_row, start_col = row - row % self.base, col - col % self.base
+
+        for i in range(self.base**2):
+            if num in (self.board[row][i], self.board[i][col]):
+                return False
+
+            grid_row, grid_col = start_row + (i // self.base), start_col + (
+                i % self.base
+            )
+            if self.board[grid_row][grid_col] == num:
+                return False
+
+        return True
+
     def validate(self) -> bool:
         """
         Checks if the current state of the Sudoku board is valid.
@@ -40,10 +67,13 @@ class Sudoku:
         Returns:
             bool: True if the board is valid, False otherwise.
         """
-        bad_rows = [row for row in self.board if not sum(row) == sum(set(row))]
+        valid_sum = sum(range(self.base**2 + 1))
+        bad_rows = [
+            row for row in self.board if not sum(row) == sum(set(row)) == valid_sum
+        ]
         cols: list[list[int]] = list(zip(*self.board))  # type: ignore
 
-        bad_cols = [col for col in cols if not sum(col) == sum(set(col))]
+        bad_cols = [col for col in cols if not sum(col) == sum(set(col)) == valid_sum]
         squares = []
 
         for i in range(0, self.base**2, self.base):
@@ -56,7 +86,9 @@ class Sudoku:
                 squares.append(square)
 
         bad_squares = [
-            square for square in squares if not sum(square) == sum(set(square))
+            square
+            for square in squares
+            if not sum(square) == sum(set(square)) == valid_sum
         ]
 
         return not (bad_rows or bad_cols or bad_squares)
@@ -111,7 +143,7 @@ class Sudoku:
 
         return board
 
-    def insert_number(self, row: int, col: int, number: int) -> bool:
+    def insert_number(self, row: int, col: int, num: int) -> bool:
         """
         Inserts a number into the Sudoku board.
 
@@ -123,14 +155,10 @@ class Sudoku:
         Returns:
             bool: True if the board is full.
         """
-        self.board[row][col] = number
         self.moves += 1
-
-        for column in self.board:
-            for num in column:
-                if num == 0:
-                    return False
-        return True
+        valid = self.cell_is_valid(row, col, num)
+        self.board[row][col] = num
+        return valid
 
     def set_base(self, base: int) -> None:
         """

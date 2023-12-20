@@ -46,6 +46,7 @@ class UI(tk.Frame):
         self.update_grid()
         self.create_menu()
         self.bind("<Configure>", self.on_window_resize)
+        self.user_resized = True
 
     def update_grid(self) -> None:
         """
@@ -279,14 +280,14 @@ class UI(tk.Frame):
         if not self.user_resized:
             return
 
-        if self.resize_timer is not None:
+        if self.resize_timer:
             self.after_cancel(self.resize_timer)
 
         self.resize_timer = self.after(500, lambda: self.window_resize_action(event))
 
     def window_resize_action(self, event: tk.Event) -> None:
         """
-        Executes actions related to window resizing.
+        Executes actions related to window resizing, such as changing the font size of the cells.
         """
         font_size = (
             min(event.height // 15, event.width // 15) * 9 // self.sudoku.base**2
@@ -296,7 +297,7 @@ class UI(tk.Frame):
             for col in range(self.sudoku.base**2):
                 self.cells[(row, col)].config(font=("Arial", font_size))
 
-    def on_cell_change(self, _: tk.Event, row: int, col: int) -> None:
+    def on_cell_change(self, event: tk.Event, row: int, col: int) -> None:
         """
         Responds to changes in individual cells of the Sudoku grid.
 
@@ -308,25 +309,25 @@ class UI(tk.Frame):
         cell_value = self.cell_values[row][col].get()
 
         full = False
+        num = 0
 
-        if cell_value == "":
-            full = self.sudoku.insert_number(row, col, 0)
+        if cell_value != "":
+            num = int(self.cell_values[row][col].get())
+
+        if self.sudoku.insert_number(row, col, num):
+            event.widget.config(foreground="black")
+
+            if self.sudoku.validate():
+                self.show_message("Validation", "Solution is valid!")
+                seconds = int(time.time() - self.sudoku.start)
+                self.database.insert_game(
+                    seconds, self.sudoku.moves, self.sudoku.empty_cells
+                )
         else:
-            full = self.sudoku.insert_number(
-                row, col, int(self.cell_values[row][col].get())
-            )
+            event.widget.config(foreground="red")
 
         if not full:
             return
-
-        if self.sudoku.validate():
-            self.show_message("Validation", "Solution is valid!")
-            seconds = int(time.time() - self.sudoku.start)
-            self.database.insert_game(
-                seconds, self.sudoku.moves, self.sudoku.empty_cells
-            )
-        else:
-            self.show_message("Validation", "Solution is invalid!")
 
     def on_base_change(self, event: tk.Event) -> None:
         """

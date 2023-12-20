@@ -58,8 +58,6 @@ class Database:
         formatted_time += f"{format_time(minutes)}:"
         formatted_time += f"{format_time(seconds)}"
 
-        print(formatted_time)
-
         self.cur.execute(
             "INSERT INTO games (time, moves, empty) VALUES (?, ?, ?)",
             (formatted_time, moves, empty_cells),
