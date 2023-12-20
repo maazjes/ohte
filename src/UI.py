@@ -307,15 +307,17 @@ class UI(tk.Frame):
         """
         cell_value = self.cell_values[row][col].get()
 
-        if cell_value == "":
-            self.sudoku.insert_number(row, col, 0)
-        else:
-            self.sudoku.insert_number(row, col, int(self.cell_values[row][col].get()))
+        full = False
 
-        for cell_row in self.cell_values:
-            for val in cell_row:
-                if val.get() == "":
-                    return
+        if cell_value == "":
+            full = self.sudoku.insert_number(row, col, 0)
+        else:
+            full = self.sudoku.insert_number(
+                row, col, int(self.cell_values[row][col].get())
+            )
+
+        if not full:
+            return
 
         if self.sudoku.validate():
             self.show_message("Validation", "Solution is valid!")

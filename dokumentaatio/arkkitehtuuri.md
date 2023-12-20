@@ -77,19 +77,23 @@ Käyttöliittymä vastaa käyttäjän toimintojen käsittelystä ja näyttää p
 Kuvataan sovelluksen keskeiset toiminnallisuudet sekvenssikaaviona:
 
 ### Uuden numeron lisääminen ruutuun
-Kun käyttäjä lisää numeron Sudokun ruutuun, sovelluksen kontrolli etenee seuraavasti:  
+Kun käyttäjä lisää numeron Sudokun ruutuun, minkä jälkeen Sudoku on täynnä ja käyttäjän antama vastaus on oikein, sovelluksen kontrolli etenee seuraavasti:  
 
 ```mermaid
 sequenceDiagram
     participant K as Käyttäjä
     participant UI as UI
     participant G as Sudoku
+    participant D as Database
 
-    K->>UI: Syöttää numeron ruutuun
-    UI->>G: Päivittää numeron pelilogiikkaan
-    G->>G: Tarkistaa pelitilanteen
-    G-->>UI: Ilmoittaa muutoksesta / tilasta
-    UI->>UI: Päivittää ruudun näytöllä
+    K->>+UI: Syöttää numeron ruutuun
+    UI->>+G: insert_number(row, col, num)
+    G-->>-UI: True
+    UI->>+G: validate()
+    G-->>-UI: True
+    UI->>UI: show_message("Validation", "Solution is valid!")
+    UI-->>-K: Kertoo voitosta uudessa ikkunassa
+    UI->>D: insert_game(seconds, moves, empty_cells)
 ```
 
 ### Tyhjien ruutujen lukumäärän muuttaminen

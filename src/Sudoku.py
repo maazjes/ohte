@@ -111,7 +111,7 @@ class Sudoku:
 
         return board
 
-    def insert_number(self, row: int, col: int, number: int) -> None:
+    def insert_number(self, row: int, col: int, number: int) -> bool:
         """
         Inserts a number into the Sudoku board.
 
@@ -119,9 +119,18 @@ class Sudoku:
             row (int): The row index where the number will be inserted.
             col (int): The column index where the number will be inserted.
             number (int): The number to insert into the board.
+
+        Returns:
+            bool: True if the board is full.
         """
         self.board[row][col] = number
         self.moves += 1
+
+        for column in self.board:
+            for num in column:
+                if num == 0:
+                    return False
+        return True
 
     def set_base(self, base: int) -> None:
         """
