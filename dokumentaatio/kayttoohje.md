@@ -22,7 +22,7 @@ Kun ohjelma on käynnistetty, se luo automaattisesti satunnaisen Sudokun, jonka 
 
 ## Uuden Sudokun generointi
 
-Uuden satunnaisen Sudokun generointi onnistuu helposti valikosta painamalla "New Sudoku"-tekstiä. Menusta saa myös avattua asetukset ja pelien tilastot.
+Uuden satunnaisen Sudokun generointi onnistuu helposti valikosta painamalla "New Sudoku"-tekstiä. Valikosta saa myös avattua asetukset ja pelien tilastot.
 
 ![Sudoku](../assets/menu.jpg)
 
@@ -30,7 +30,7 @@ Uuden satunnaisen Sudokun generointi onnistuu helposti valikosta painamalla "New
 
 ### Tyhjien ruutujen lukumäärä
 
-Tyhjien ruutujen määrä voi olla nollan ja sudokun ruutujen määrän välillä oleva numero.
+Tyhjien ruutujen lukumäärä voi olla nollan ja Sudokun ruutujen määrän välillä oleva numero.
 
 ![Tyhjien ruutujen lukumäärä -asetus](../assets/empty_cells.jpg)
 
@@ -42,7 +42,7 @@ Sudokun koon voi valita dropdown-valikosta. Base 3 tarkoittaa, että Sudokun siv
 
 ## Pelin tarkistus
 
-Sudoku tarkistetaan automaattisesti, ku kaikki ruudut ovat täynnä.
+Sudoku tarkistetaan automaattisesti, kun kaikki ruudut ovat täynnä.
 
 ## Statistiikka
 
