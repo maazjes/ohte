@@ -19,7 +19,8 @@ class UI(tk.Frame):
         user_resized: Flag indicating whether the user has resized the window.
         resize_timer: Timer for resize event handling.
         settings_window: Settings window.
-        stats_window: Window displaying game statistics.
+        stats_window: Window displaying stats_table.
+        stats_table: Table displaying game statistics.
     """
 
     def __init__(self, root: tk.Tk, sudoku: Sudoku, database: Database) -> None:
@@ -41,7 +42,7 @@ class UI(tk.Frame):
         self.resize_timer = ""
         self.settings_window: tk.Toplevel | None = None
         self.stats_window: tk.Toplevel | None = None
-        self.tree: ttk.Treeview | None = None
+        self.stats_table: ttk.Treeview | None = None
         self.update_grid(True)
         self.create_menu()
         self.bind("<Configure>", self.on_window_resize)
@@ -240,20 +241,20 @@ class UI(tk.Frame):
 
         self.stats_window = tk.Toplevel(self)
         self.stats_window.title("Stats")
-        self.tree = ttk.Treeview(self.stats_window)
-        self.tree["columns"] = ("Time", "Moves", "Empty cells")
-        self.tree.column("#0", width=0, stretch=tk.NO)
-        tree_as_param = self.tree
+        self.stats_table = ttk.Treeview(self.stats_window)
+        self.stats_table["columns"] = ("Time", "Moves", "Empty cells")
+        self.stats_table.column("#0", width=0, stretch=tk.NO)
+        stats_table_as_param = self.stats_table
 
-        for col in self.tree["columns"]:
+        for col in self.stats_table["columns"]:
 
             def on_heading_press(
-                tree: ttk.Treeview = tree_as_param, col: str = col
+                tree: ttk.Treeview = stats_table_as_param, col: str = col
             ) -> None:
                 sort_column(tree, col, False)
 
-            self.tree.column(col, anchor=tk.CENTER)
-            self.tree.heading(
+            self.stats_table.column(col, anchor=tk.CENTER)
+            self.stats_table.heading(
                 col,
                 text=col,
                 anchor=tk.CENTER,
@@ -261,14 +262,14 @@ class UI(tk.Frame):
             )
 
         for game in self.database.get_games():
-            self.tree.insert("", tk.END, values=(game[1], game[2], game[3]))
+            self.stats_table.insert("", tk.END, values=(game[1], game[2], game[3]))
 
         scrollbar = ttk.Scrollbar(
-            self.stats_window, orient="vertical", command=self.tree.yview
+            self.stats_window, orient="vertical", command=self.stats_table.yview
         )
 
-        self.tree.configure(yscrollcommand=scrollbar.set)
-        self.tree.grid(row=0, column=0, sticky="nsew")
+        self.stats_table.configure(yscrollcommand=scrollbar.set)
+        self.stats_table.grid(row=0, column=0, sticky="nsew")
         scrollbar.grid(row=0, column=1, sticky="ns")
         self.stats_window.grid_columnconfigure(0, weight=1)
         self.stats_window.grid_rowconfigure(0, weight=1)
@@ -352,8 +353,8 @@ class UI(tk.Frame):
                 game = (seconds, self.sudoku.moves, self.sudoku.empty_cells)
 
                 self.database.insert_game(*game)
-                if self.tree:
-                    self.tree.insert(
+                if self.stats_table:
+                    self.stats_table.insert(
                         "",
                         tk.END,
                         values=game,
