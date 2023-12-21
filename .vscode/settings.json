@@ -1,6 +1,5 @@
 {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
-    "python.linting.mypyEnabled": true,
-    "python.linting.enabled": true
+    "mypy-type-checker.ignorePatterns": ["tasks.py", "src/tests/*"]
 }
