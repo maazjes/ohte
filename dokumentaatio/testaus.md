@@ -4,13 +4,13 @@ Ohjelmaa on testattu Pytestin avullla yksikkö- ja integraatiotesteillä sekä m
 
 ## Yksikkö- ja integraatiotestit
 
-### Tietokanta (database.py)
+### Tietokanta
 
 TestDatabase-luokka sisältää yksikkötestejä Database-luokalle. Testeissä luodaan testausta varten uusi tietokantatiedosto "testing.db". Testeissä testataan kahta Database-luokan tarjoamaa metodia, joiden avulla voi joko lisätä tietokantaan pelitietoja tai hakea niitä tietokannasta.
 
-### Sudoku (sudoku.py)
+### Sovelluslogiikka
 
-TestSudoku-luokka sisältää yksikkötestejä Sudoku-luokalle. Testit keskittyvät muun muassa:
+TestSudoku-luokka sisältää yksikkötestejä Sudoku-luokalle, joka huolehtii ohjelman sovelluslogiikasta. Testit keskittyvät muun muassa:
 
 - solujen validiuden tarkistamiseen
 - pelilaudan oikeellisuuden varmistamiseen.
