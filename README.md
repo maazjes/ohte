@@ -5,13 +5,13 @@ Ohjelma generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa.
 
 ## Dokumentaatio
 
-[Käyttöohje](dokumentaatio/kayttoohje.md)  
-[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)  
-[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)  
-[Testausdokumentti](dokumentaatio/testaus.md)  
-[Changelog](dokumentaatio/changelog.md)  
-[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)  
-[Release](https://github.com/maazjes/ohte/releases/tag/viikko5)
+- [Käyttöohje](dokumentaatio/kayttoohje.md)  
+- [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)  
+- [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)  
+- [Testausdokumentti](dokumentaatio/testaus.md)  
+- [Changelog](dokumentaatio/changelog.md)  
+- [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)  
+- [Release](https://github.com/maazjes/ohte/releases/tag/viikko5)
 
 ## Asennus
 
