@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "ohte"
+name = "src"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Marius Hasan <marzusness@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
