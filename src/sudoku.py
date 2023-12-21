@@ -9,13 +9,13 @@ class Sudoku:
     Class representing a Sudoku game.
 
     Attributes:
-        base (int): Base number of the Sudoku.
+        base: Base number of the Sudoku.
         Base * base is the actual length of the Sudoku. Default is 3.
-        board (list): Current state of the Sudoku board.
-        original_board (list): Original state of the Sudoku board for reference.
-        empty_cells (int): Number of empty cells in the Sudoku.
-        start (float): Start time of the game.
-        moves (int): Number of moves made in the game.
+        board: Current state of the Sudoku board.
+        original_board: Original state of the Sudoku board for reference.
+        empty_cells: Number of empty cells in the Sudoku.
+        start: Start time of the game.
+        moves: Number of moves made in the game.
     """
 
     def __init__(self) -> None:
@@ -35,12 +35,12 @@ class Sudoku:
         Checks if a given number in a given cell is valid according to Sudoku rules.
 
         Args:
-            row (int): Row index of the cell.
-            col (int): Column index of the cell.
-            num (int): Number to check in the cell.
+            row: Row index of the cell.
+            col: Column index of the cell.
+            num: Number to check in the cell.
 
         Returns:
-            bool: True if the number is valid, False otherwise.
+            True if the number is valid, False otherwise.
         """
 
         start_row, start_col = row - row % self.base, col - col % self.base
@@ -65,7 +65,7 @@ class Sudoku:
         all numbers from 1 to base^2 without repetition.
 
         Returns:
-            bool: True if the board is valid, False otherwise.
+            True if the board is valid, False otherwise.
         """
         valid_sum = sum(range(self.base**2 + 1))
         bad_rows = [
@@ -95,13 +95,13 @@ class Sudoku:
 
     def generate_sudoku(self, base: int) -> list[list[int]]:
         """
-        Generates a new Sudoku of a given base size.
+        Generates a new Sudoku of a given base.
 
         Args:
-            base (int): Base size of the Sudoku to be generated.
+            base: Base of the Sudoku to be generated.
 
         Returns:
-            list[list[int]]: 2D list representing the Sudoku.
+            2D list representing the Sudoku.
         """
 
         def pattern(row: int, column: int, base: int) -> int:
@@ -109,12 +109,12 @@ class Sudoku:
             Gives a number in range 1-9 for a given cell based on the rules of Sudoku.
 
             Args:
-                row (int): Row index of the cell.
-                column (int): Column index of the cell.
-                base (int): Base of the Sudoku.
+                row: Row index of the cell.
+                column: Column index of the cell.
+                base: Base of the Sudoku.
 
             Returns:
-                int: Number in range 1-9.
+                Number in range 1-9.
             """
             return (base * (row % base) + row // base + column) % (base**2)
 
@@ -123,10 +123,10 @@ class Sudoku:
             Shuffles a given range into a list.
 
             Args:
-                s (range): Range to shuffle.
+                s: Range to shuffle.
 
             Returns:
-                list[int]: Shuffled list of the given range.
+                Shuffled list of the given range.
             """
             return random.sample(s, len(s))
 
@@ -148,12 +148,12 @@ class Sudoku:
         Inserts a number into the Sudoku board to a given cell.
 
         Args:
-            row (int): Row index of the cell.
-            col (int): Column index of the cell.
-            num (int): Number to be inserted.
+            row: Row index of the cell.
+            col: Column index of the cell.
+            num: Number to be inserted.
 
         Returns:
-            bool: True if the number inserted fits the Sudoku, False otherwise.
+            True if the number inserted fits the Sudoku, False otherwise.
         """
         self.moves += 1
         valid = self.cell_is_valid(row, col, num)
@@ -162,10 +162,10 @@ class Sudoku:
 
     def set_base(self, base: int) -> None:
         """
-        Sets a new random Sudoku of a given base size as the current board.
+        Sets a new random Sudoku of a given base as the current board.
 
         Args:
-            base (int): Base size of the Sudoku to set.
+            base: Base of the Sudoku to set.
         """
         self.base = base
         self.set_random_sudoku()
@@ -175,7 +175,7 @@ class Sudoku:
         Sets a specified number of cells in the current board to be empty.
 
         Args:
-            empty_cells (int): Amount of cells to empty.
+            empty_cells: Amount of cells to empty.
         """
         self.empty_cells = empty_cells
         self.moves = 0
@@ -210,6 +210,6 @@ class Sudoku:
         Provides a string representation of the Sudoku board.
 
         Returns:
-            str: String representation of the Sudoku board.
+            String representation of the Sudoku board.
         """
         return "\n".join([str(self.board[i]) for i in range(len(self.board))])

@@ -11,10 +11,10 @@ class Database:
         Initializes a Database object, establishes a connection to the SQLite database,
         and creates a table for storing Sudoku game records if it doesn't exist.
 
-        The table 'games' is structured with columns for ID, time, moves, and empty cells.
+        The table "games" is structured with columns for ID, time, moves, and empty cells.
 
         Args:
-            filename (str): File name of the database to use.
+            filename: File name of the database file to use.
         """
         self.con = sqlite3.connect(filename)
         self.cur = self.con.cursor()
@@ -28,9 +28,9 @@ class Database:
         Inserts a Sudoku game record into the database.
 
         Args:
-            seconds (int): Time of the game in seconds.
-            moves (int): Number of moves made in the game.
-            empty_cells (int): Number of empty cells in the game.
+            seconds: Time of the game in seconds.
+            moves: Number of moves made in the game.
+            empty_cells: Number of empty cells in the game.
 
         The method calculates the elapsed time from the start to the current time and
         formats it before storing it along with the number of moves and empty cells in the database.
@@ -69,7 +69,7 @@ class Database:
         Retrieves all game records from the database.
 
         Returns:
-            list[tuple[int, int, int, int]]: List of tuples, each representing a game record.
+            List of tuples, each representing a game record.
             Each tuple contains the game ID, formatted time,
             number of moves, and number of empty cells.
         """
