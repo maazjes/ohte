@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Sovellus on hyvin simppeli ja sen kaikki toiminnot selviävät kokeilemalla muutamassa sekunnissa. Pidän siksi käyttöohjeen lyhyenä.
+Ohjelma on hyvin simppeli ja sen kaikki toiminnot selviävät kokeilemalla muutamassa sekunnissa. Pidän siksi käyttöohjeen lyhyenä.
 
 ## Ohjelman käynnistäminen
 
@@ -10,7 +10,7 @@ Sovellus on hyvin simppeli ja sen kaikki toiminnot selviävät kokeilemalla muut
 poetry install
 ```
 
-2. Käynnistä sovellus komennolla:
+2. Käynnistä ohjelma komennolla:
 
 ```bash
 poetry run invoke start

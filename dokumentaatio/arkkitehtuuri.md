@@ -66,7 +66,7 @@ Sovelluslogiikan muodostaa Sudoku-luokka, joka hallinnoi pelin tilaa ja säänt�
 ## Tietojen pysyväistallennus
 Database-luokka vastaa tietokantayhteyksien hallinnasta ja tietojen tallentamisesta sekä hakemisesta sqlite-tietokannasta. Luokka huolehtii Sudoku-pelien tilastotietojen, kuten peliajan, siirtojen määrän ja tyhjien ruutujen lukumäärän, tallentamisesta.
 
-- **Tietokannan alustus**: Sovelluksen käynnistyessä Database-luokan konstruktori luo yhteyden sqlite-tietokantaan. Se myös varmistaa, että tarvittava taulu pelitietojen tallentamiseen on olemassa.
+- **Tietokannan alustus**: Ohjelman käynnistyessä Database-luokan konstruktori luo yhteyden sqlite-tietokantaan. Se myös varmistaa, että tarvittava taulu pelitietojen tallentamiseen on olemassa.
 - **Pelitietojen tallennus**: insert_game-metodi tallentaa pelin tiedot tietokantaan. Metodi ottaa vastaan pelin aloitusaikaleiman, siirtojen määrän ja tyhjien ruutujen lukumäärän, ja tallentaa nämä tiedot tietokantaan.
 - **Pelitietojen haku**: get_games-metodi hakee kaikki pelitilastot tietokannasta ja palauttaa ne listana.
 
@@ -74,10 +74,10 @@ Database-luokka vastaa tietokantayhteyksien hallinnasta ja tietojen tallentamise
 Käyttöliittymä vastaa käyttäjän toimintojen käsittelystä ja näyttää pelitilastot käyttäjälle. Se käyttää Database-luokkaa pelitietojen tallentamiseen ja hakemiseen. Esimerkiksi, kun käyttäjä päättää pelin, UI kutsuu Database-luokan insert_game-metodia tallentaakseen pelitilastot.
 
 ## Päätoiminnallisuudet
-Kuvataan sovelluksen keskeiset toiminnallisuudet sekvenssikaaviona:
+Kuvataan ohjelman keskeiset toiminnallisuudet sekvenssikaaviona:
 
 ### Uuden numeron lisääminen ruutuun
-Kun käyttäjä lisää numeron Sudokun ruutuun, minkä jälkeen Sudoku on täynnä ja käyttäjän antama vastaus on oikein, sovelluksen kontrolli etenee seuraavasti:  
+Kun käyttäjä lisää numeron Sudokun ruutuun, minkä jälkeen Sudoku on täynnä ja käyttäjän antama vastaus on oikein, ohjelman kontrolli etenee seuraavasti:  
 
 ```mermaid
 sequenceDiagram
@@ -97,7 +97,7 @@ sequenceDiagram
 ```
 
 ### Tyhjien ruutujen lukumäärän muuttaminen
-Kun käyttäjä muuttaa Sudokussa olevien tyhjien ruutujen lukumäärää, sovelluksen kontrolli etenee seuraavasti:  
+Kun käyttäjä muuttaa Sudokussa olevien tyhjien ruutujen lukumäärää, ohjelman kontrolli etenee seuraavasti:  
 
 ```mermaid
 sequenceDiagram
@@ -112,7 +112,7 @@ sequenceDiagram
 ```
 
 ### Sudokun koon muuttaminen
-Kun käyttäjä muuttaa Sudokun kokoa, sovelluksen kontrolli etenee seuraavasti:  
+Kun käyttäjä muuttaa Sudokun kokoa, ohjelman kontrolli etenee seuraavasti:  
 
 ```mermaid
 sequenceDiagram

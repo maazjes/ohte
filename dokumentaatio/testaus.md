@@ -1,6 +1,6 @@
 # Testausdokumentti
 
-Sovellusta on testattu Pytestin avullla yksikkö- ja integraatiotesteillä sekä manuaalisesti käymällä läpi ohjelma läpikotaisesti ja yrittämällä syöttää tekstikenttiin virheellisiä arvoja.
+Ohjelmaa on testattu Pytestin avullla yksikkö- ja integraatiotesteillä sekä manuaalisesti käymällä läpi ohjelma läpikotaisesti ja yrittämällä syöttää tekstikenttiin virheellisiä arvoja.
 
 ## Yksikkö- ja integraatiotestit
 
@@ -23,4 +23,4 @@ Testikattavuus on testattu Coverage-kirjaston avulla. Testauksen haaraumakattavu
 
 ## Järjestelmätestaus
 
-Järjestelmätestaus on suoritettu kattavasti käyttöohjeiden kuvaamalla tavalla sekä Linux- että Windows-ympäristössä. Järjestelmätestauksen aikana on kiinnitetty erityistä huomiota syötekenttien virheidenkäsittelyyn. Kaikkiin syötekenttiin on yritetty syöttää virheellisiä arvoja, ja järjestelmän on varmistettu käsittelevän nämä tapaukset asianmukaisesti.
+Järjestelmätestaus on suoritettu kattavasti käyttöohjeiden kuvaamalla tavalla sekä Linux- että Windows-ympäristössä. Järjestelmätestauksen aikana on kiinnitetty erityistä huomiota syötekenttien virheidenkäsittelyyn. Kaikkiin syötekenttiin on yritetty syöttää virheellisiä arvoja, ja ohjelman on varmistettu käsittelevän nämä tapaukset asianmukaisesti.

@@ -1,6 +1,6 @@
 # Sudoku
 
-Sovellus generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa. Vaikeustaso muutetaan muuttamalla Sudokussa olevien tyhjien ruutujen lukumäärää. Kun Sudokun ruutuun lisätään virheellinen numero, ruudussa olevan numeron väri muuttuu punaiseksi. Lisäksi voitetuista peleistä lisätään SQLite-tietokantaan dataa, jota voi myöhemmin tarkastella taulukkomuodossa.
+Ohjelma generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa. Vaikeustaso muutetaan muuttamalla Sudokussa olevien tyhjien ruutujen lukumäärää. Kun Sudokun ruutuun lisätään virheellinen numero, ruudussa olevan numeron väri muuttuu punaiseksi. Lisäksi voitetuista peleistä lisätään SQLite-tietokantaan dataa, jota voi myöhemmin tarkastella taulukkomuodossa.
 
 
 ## Dokumentaatio
@@ -20,7 +20,7 @@ Sovellus generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa
 poetry install
 ```
 
-2. Käynnistä sovellus komennolla:
+2. Käynnistä Ohjelma komennolla:
 
 ```bash
 poetry run invoke start
