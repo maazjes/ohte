@@ -15,6 +15,12 @@ TestSudoku-luokka sisältää yksikkötestejä Sudoku-luokalle. Testit keskittyv
 - solujen validiuden tarkistamiseen
 - pelilaudan oikeellisuuden varmistamiseen.
 
+### Testikattavuus
+
+Testikattavuus on testattu Coverage-kirjaston avulla. Testauksen haaraumakattavuus on 100%, mutta tämän perusteella ei pitäisi kuitenkaan olettaa, että testit ovat täydellisiä.
+
+![Coverage-reportti](../assets/coverage.jpg)
+
 ## Järjestelmätestaus
 
-Järjestelmätestaus on suoritettu kattavasti käyttöohjeiden kuvaamalla tavalla sekä Linux- että Windows-ympäristössä. Järjestelmätestauksen aikana on kiinnitetty erityistä huomiota syötekenttien virheenkäsittelyyn. Kaikkiin syötekenttiin on yritetty syöttää virheellisiä arvoja, ja järjestelmän on varmistettu käsittelevän nämä tapaukset asianmukaisesti.
+Järjestelmätestaus on suoritettu kattavasti käyttöohjeiden kuvaamalla tavalla sekä Linux- että Windows-ympäristössä. Järjestelmätestauksen aikana on kiinnitetty erityistä huomiota syötekenttien virheidenkäsittelyyn. Kaikkiin syötekenttiin on yritetty syöttää virheellisiä arvoja, ja järjestelmän on varmistettu käsittelevän nämä tapaukset asianmukaisesti.
