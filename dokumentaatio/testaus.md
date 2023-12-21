@@ -17,7 +17,8 @@ TestSudoku-luokka sisältää yksikkötestejä Sudoku-luokalle. Testit keskittyv
 
 ### Testikattavuus
 
-Testikattavuus on testattu Coverage-kirjaston avulla. Testauksen haaraumakattavuus on 100%, mutta tämän perusteella ei pitäisi kuitenkaan olettaa, että testit ovat täydellisiä.  
+Testikattavuus on testattu Coverage-kirjaston avulla. Testauksen haaraumakattavuus on 100%, mutta tämän perusteella ei pitäisi kuitenkaan olettaa, että testit ovat täydellisiä.
+<br />
 
 ![Coverage-reportti](../assets/coverage.jpg)
 
