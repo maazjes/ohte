@@ -4,13 +4,13 @@ Ohjelma generoi satunnaisia Sudokuita, joita käyttäjä voi ratkaista. Ratkaisu
 
 ## Toiminnallisuudet
 
-- [x] Vaikeustason muuttaminen
+- [x] Tyhjien ruutujen lukumäärän muuttaminen
 - [x] Ratkaisun automaattinen tarkistus
 - [x] Ruutuun numeron lisääminen numeronäppäimillä
 - [x] Sudokun koon muuttaminen
 - [x] Syötteiden validointi
-- [x] Uuden Sudokun generointi
-- [x] Pelien keston, tyhjien ruutujen lukumäärän ja siirtojen tallentaminen SQLite-tietokantaan
+- [x] Uuden satunnaisen Sudokun generointi
+- [x] Pelien keston, tyhjien ruutujen lukumäärän ja siirtojen lukumäärän tallentaminen SQLite-tietokantaan
 - [x] Mahdollisuus tarkastella tallennettuja pelitietoja taulukkomuodossa Stats-ikkunasta
     - [x] Taulukon rivit voi järjestää sarakkeen mukaan painamalla sarakkeen otsikkoa
 - [x] Ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin

@@ -9,7 +9,7 @@
 
 ## Viikko 5
 
-- Lisätty asetukset-paneeli, josta voi vaihtaa tyhjien ruutujen määrää Sudokussa. Base-asetus ei vielä toimi
+- Lisätty asetukset-paneeli, josta voi vaihtaa tyhjien ruutujen määrää Sudokussa. Base-asetus ei vielä toimi.
 
 ## Viikko 6
 
@@ -18,11 +18,12 @@
 - Pienemmät ruudukot erotettu isommasta ruudukosta
 - Painike uuden satunnaisen Sudokun generoimiseksi
 - Kun käyttäjä on ratkaissut Sudokun, hän saa palautetta sen oikeellisuudesta uudessa ikkunassa
+- Kaikki syötteet validoidaan
 
 ## Viikko 7
 
-- Pelatuista peleistä tallennetaan pelitietoja SQLite-tietokantaan
-- Tallennettuja pelitietoja voi tarkastella taulukkomuodossa "Stats"-ikkunasta, jonka saa auki valikosta
+- Pelatuista peleistä tallennetaan pelien kesto, tyhjien ruutujen lukumäärä ja siirtojen lukumäärä SQLite-tietokantaan
+- Tallennettuja pelitietoja voi tarkastella taulukkomuodossa Stats-ikkunasta, jonka saa auki valikosta
     - Taulukon rivit voi järjestää sarakkeen mukaan painamalla sarakkeen otsikkoa
 - Ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
 - Valmiiksi täytetyt ruudut ovat harmaita ja niissä olevaa numeroa ei voi muuttaa
