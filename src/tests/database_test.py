@@ -4,14 +4,13 @@ from database import Database
 
 class TestDatabase(unittest.TestCase):
     def setUp(self) -> None:
-        self.database = Database()
+        self.database = Database("testing.db")
 
     def test_insert_game(self) -> None:
         moves = 10
         empty_cells = 5
 
         self.database.insert_game(5525, moves, empty_cells)
-
         self.database.cur.execute("SELECT * FROM games ORDER BY id DESC LIMIT 1")
         last_row = self.database.cur.fetchone()
 

@@ -6,6 +6,6 @@ from ui import UI
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Sudoku")
-    ui = UI(root, Sudoku(), Database())
+    ui = UI(root, Sudoku(), Database("data.db"))
     ui.pack(expand=True, fill="both")
     root.mainloop()

@@ -6,14 +6,17 @@ class Database:
     Class that interacts with the database.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, filename: str) -> None:
         """
         Initializes a Database object, establishes a connection to the SQLite database,
         and creates a table for storing Sudoku game records if it doesn't exist.
 
         The table 'games' is structured with columns for ID, time, moves, and empty cells.
+
+        Args:
+            filename (str): File name of the database to use.
         """
-        self.con = sqlite3.connect("data.db")
+        self.con = sqlite3.connect(filename)
         self.cur = self.con.cursor()
         self.cur.execute(
             """CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, 
