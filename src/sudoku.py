@@ -156,6 +156,7 @@ class Sudoku:
             True if the number inserted fits the Sudoku, False otherwise.
         """
         self.moves += 1
+        self.board[row][col] = 0
         valid = self.cell_is_valid(row, col, num)
         self.board[row][col] = num
         return valid

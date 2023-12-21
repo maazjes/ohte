@@ -41,6 +41,7 @@ class UI(tk.Frame):
         self.resize_timer = ""
         self.settings_window: tk.Toplevel | None = None
         self.stats_window: tk.Toplevel | None = None
+        self.tree: ttk.Treeview | None = None
         self.update_grid(True)
         self.create_menu()
         self.bind("<Configure>", self.on_window_resize)
@@ -239,17 +240,20 @@ class UI(tk.Frame):
 
         self.stats_window = tk.Toplevel(self)
         self.stats_window.title("Stats")
-        tree = ttk.Treeview(self.stats_window)
-        tree["columns"] = ("Time", "Moves", "Empty cells")
-        tree.column("#0", width=0, stretch=tk.NO)
+        self.tree = ttk.Treeview(self.stats_window)
+        self.tree["columns"] = ("Time", "Moves", "Empty cells")
+        self.tree.column("#0", width=0, stretch=tk.NO)
+        tree_as_param = self.tree
 
-        for col in tree["columns"]:
+        for col in self.tree["columns"]:
 
-            def on_heading_press(tree: ttk.Treeview = tree, col: str = col) -> None:
+            def on_heading_press(
+                tree: ttk.Treeview = tree_as_param, col: str = col
+            ) -> None:
                 sort_column(tree, col, False)
 
-            tree.column(col, anchor=tk.CENTER)
-            tree.heading(
+            self.tree.column(col, anchor=tk.CENTER)
+            self.tree.heading(
                 col,
                 text=col,
                 anchor=tk.CENTER,
@@ -257,14 +261,14 @@ class UI(tk.Frame):
             )
 
         for game in self.database.get_games():
-            tree.insert("", tk.END, values=(game[1], game[2], game[3]))
+            self.tree.insert("", tk.END, values=(game[1], game[2], game[3]))
 
         scrollbar = ttk.Scrollbar(
-            self.stats_window, orient="vertical", command=tree.yview
+            self.stats_window, orient="vertical", command=self.tree.yview
         )
 
-        tree.configure(yscrollcommand=scrollbar.set)
-        tree.grid(row=0, column=0, sticky="nsew")
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        self.tree.grid(row=0, column=0, sticky="nsew")
         scrollbar.grid(row=0, column=1, sticky="ns")
         self.stats_window.grid_columnconfigure(0, weight=1)
         self.stats_window.grid_rowconfigure(0, weight=1)
@@ -333,8 +337,7 @@ class UI(tk.Frame):
             col: Column index of the changed cell.
         """
         cell_value = self.cell_values[row][col].get()
-
-        full = False
+        print(cell_value)
         num = 0
 
         if cell_value != "":
@@ -346,15 +349,18 @@ class UI(tk.Frame):
             if self.sudoku.validate():
                 self.show_message("Validation", "Solution is valid!")
                 seconds = int(time.time() - self.sudoku.start)
-                self.database.insert_game(
-                    seconds, self.sudoku.moves, self.sudoku.empty_cells
-                )
+                game = (seconds, self.sudoku.moves, self.sudoku.empty_cells)
+
+                self.database.insert_game(*game)
+                if self.tree:
+                    self.tree.insert(
+                        "",
+                        tk.END,
+                        values=game,
+                    )
 
         else:
             event.widget.config(foreground="red")
-
-        if not full:
-            return
 
     def on_base_change(self, event: tk.Event) -> None:
         """
