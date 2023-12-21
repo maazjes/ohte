@@ -15,13 +15,13 @@ Ohjelma generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa.
 
 ## Asennus
 
-1. Asenna riippuvuudet komennolla:
+Asenna riippuvuudet komennolla:
 
 ```bash
 poetry install
 ```
 
-2. Käynnistä Ohjelma komennolla:
+Käynnistä Ohjelma komennolla:
 
 ```bash
 poetry run invoke start
