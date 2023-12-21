@@ -148,6 +148,7 @@ class UI(tk.Frame):
                     justify="center",
                     width=2,
                     font=("Arial", 25),
+                    state="normal" if self.sudoku.board[row][col] == 0 else "disable",
                 )
                 cell.bind(
                     "<KeyRelease>",

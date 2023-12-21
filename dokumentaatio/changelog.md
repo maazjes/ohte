@@ -1,15 +1,15 @@
 ## Viikko 3
 
-- Lisätty Sudoku-luokka, joka luo satunnaisen sudokun ja tarkistaa tarvittaessa itsensä
+- Lisätty Sudoku-luokka, joka luo satunnaisen Sudokun ja tarkistaa tarvittaessa itsensä
 
 ## Viikko 4
 
 - Lisätty alkukantainen UI, joka on yhdistetty sovelluslogiikkaan
-- Sudokun ollessa täynnä, UI tarkistaa sudokun ja printtaa konsoliin, onko se oikein vai väärin
+- Sudokun ollessa täynnä, UI tarkistaa Sudokun ja printtaa konsoliin, onko se oikein vai väärin
 
 ## Viikko 5
 
-- Lisätty asetukset-paneeli, josta voi vaihtaa tyhjien ruutujen määrää sudokussa. Base-asetus ei vielä toimi
+- Lisätty asetukset-paneeli, josta voi vaihtaa tyhjien ruutujen määrää Sudokussa. Base-asetus ei vielä toimi
 
 ## Viikko 6
 
@@ -24,4 +24,5 @@
 - Pelatuista peleistä tallennetaan pelitietoja SQLite-tietokantaan
 - Tallennettuja pelitietoja voi tarkastella taulukkomuodossa "Stats"-ikkunasta, jonka saa auki valikosta
     - Taulukon rivit voi järjestää sarakkeen mukaan painamalla sarakkeen otsikkoa
-- Sudokun ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
+- Ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
+- Valmiiksi täytetyt ruudut ovat harmaita ja niissä olevaa numeroa ei voi muuttaa

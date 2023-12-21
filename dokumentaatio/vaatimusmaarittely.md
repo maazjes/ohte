@@ -1,6 +1,6 @@
 # Vaatimusmäärittely
 
-Ohjelma generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero. Käyttäjä voi myös vaihtaa generoitavien sudokujen vaikeustasoa ja kokoa. Vaikeustasoa voi vaihtaa vaihtamalla tyhjien ruutujen määrää. Lisäksi kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen määräksi 90.
+Ohjelma generoi satunnaisia Sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero. Käyttäjä voi myös vaihtaa generoitavien Sudokujen vaikeustasoa ja kokoa. Vaikeustasoa voi vaihtaa vaihtamalla tyhjien ruutujen määrää. Lisäksi kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen määräksi 90.
 
 ## Toiminnallisuudet
 
@@ -9,11 +9,12 @@ Ohjelma generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu
 - [x] Ruutuun numeron lisääminen numeronäppäimillä
 - [x] Sudokun koon muuttaminen
 - [x] Syötteiden validointi
-- [x] Uuden sudokun generointi
+- [x] Uuden Sudokun generointi
 - [x] Pelien keston, tyhjien ruutujen lukumäärän ja siirtojen tallentaminen SQLite-tietokantaan
-- [x] Mahdollisuus tarkastella tallennettuja pelitietoja taulukkomuodossa "Stats"-ikkunasta
+- [x] Mahdollisuus tarkastella tallennettuja pelitietoja taulukkomuodossa Stats-ikkunasta
     - [x] Taulukon rivit voi järjestää sarakkeen mukaan painamalla sarakkeen otsikkoa
-- [x] Sudokun ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
+- [x] Ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
+- [x] Valmiiksi täytetyt ruudut ovat harmaita ja niissä olevaa numeroa ei voi muuttaa
 
 ## Jatkokehitysideoita
 
