@@ -1,17 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 from typing import Any
+import time
 from sudoku import Sudoku
 from database import Database
-import time
 
 
 class UI(tk.Frame):
     """
     A class representing the User Interface (UI) for the Sudoku game.
-
-    This class is responsible for creating and managing the graphical user interface
-    components of the Sudoku game.
 
     Attributes:
         root (tk.Tk): The root window of the application.
@@ -50,10 +47,7 @@ class UI(tk.Frame):
 
     def update_grid(self) -> None:
         """
-        Updates the visual representation of the Sudoku grid on the UI.
-
-        This method refreshes the grid to reflect the current state of the Sudoku game.
-        It also updates the values in each cell based on the Sudoku puzzle's current configuration.
+        Refreshes the grid to reflect the current state and size of the Sudoku game.
         """
         self.cell_values = [
             [
@@ -80,9 +74,7 @@ class UI(tk.Frame):
 
     def create_settings(self) -> None:
         """
-        Creates a settings window with additional settings for the Sudoku game.
-
-        This method initializes and positions UI elements such as labels, entries,
+        Initializes and positions UI elements such as labels, entries,
         and buttons for configuring game settings like base size and number of empty cells.
         """
 
@@ -137,9 +129,7 @@ class UI(tk.Frame):
 
     def create_menu(self) -> None:
         """
-        Creates the main menu for the application.
-
-        This method sets up menu items such as 'New Sudoku' and 'Settings',
+        Sets up menu items such as 'New Sudoku' and 'Settings',
         attaching relevant commands to these menu options.
         """
         menu_bar = tk.Menu(self.root, bg="green")
@@ -151,12 +141,12 @@ class UI(tk.Frame):
     def create_grid(self) -> None:
         """
         Sets up the visual representation of the Sudoku grid in the UI,
-        which involves creating and positioning cell widgets according to the Sudoku layout.
+        which involves creating and positioning entry widgets according to the Sudoku layout.
         """
 
         def validate_entry(p: str) -> bool:
             """
-            Ensures correct entry in Sudoku cells.
+            Ensures correct input in Sudoku cells.
 
             Args:
                 p: The input value in a Sudoku cell to validate.
@@ -218,26 +208,39 @@ class UI(tk.Frame):
 
     def create_stats(self) -> None:
         """
-        Creates the statistics window for the application.
-
-        This method constructs a window that displays various game statistics,
+        Constructs a window that displays various game statistics,
         like the games' average completion time, moves etc.
         """
+
+        def sort_column(tree: ttk.Treeview, col: str, reverse: bool) -> None:
+            l = [(tree.set(child, col), child) for child in tree.get_children("")]
+            l.sort(reverse=reverse)
+
+            for index, (_, child) in enumerate(l):
+                tree.move(child, "", index)
+
+            tree.heading(col, command=lambda: sort_column(tree, col, not reverse))
+
         self.stats_window = tk.Toplevel(self)
         self.stats_window.title("Stats")
-
         tree = ttk.Treeview(self.stats_window)
         tree["columns"] = ("Time", "Moves", "Empty cells")
         tree.column("#0", width=0, stretch=tk.NO)
-        tree.heading("#0", text="", anchor=tk.W)
 
         for col in tree["columns"]:
+
+            def on_heading_press(tree: ttk.Treeview = tree, col: str = col) -> None:
+                sort_column(tree, col, False)
+
             tree.column(col, anchor=tk.CENTER)
-            tree.heading(col, text=col, anchor=tk.CENTER)
+            tree.heading(
+                col,
+                text=col,
+                anchor=tk.CENTER,
+                command=on_heading_press,
+            )
 
-        games = self.database.get_games()
-
-        for game in games:
+        for game in self.database.get_games():
             tree.insert("", tk.END, values=(game[1], game[2], game[3]))
 
         scrollbar = ttk.Scrollbar(
