@@ -10,10 +10,13 @@ Ohjelma generoi satunnaisia sudokuita, joita käyttäjä voi ratkaista. Ratkaisu
 - [x] Sudokun koon muuttaminen
 - [x] Syötteiden validointi
 - [x] Uuden sudokun generointi
-- [x] Peleistä tilastojen pitäminen
+- [x] Pelien keston, tyhjien ruutujen lukumäärän ja siirtojen tallentaminen SQLite-tietokantaan
+- [x] Mahdollisuus tarkastella tallennettuja pelitietoja taulukkomuodossa "Stats"-ikkunasta
+    - [x] Taulukon rivit voi järjestää sarakkeen mukaan painamalla sarakkeen otsikkoa
+- [x] Sudokun ruudussa olevan numeron väri muuttuu punaiseksi, jos se on väärin
 
 ## Jatkokehitysideoita
 
-- [ ] Vaikeustason määrittely monipuolisemmin, kun pelkän tyhjien ruutujen lukumäärän perusteella.
-- [ ] Käyttäjän luominen ja sijoitusten ylläpito verrattuna muihin käyttäjiin tulostaululla.
-- [ ] Sudokun ratkaisija, joka ratkaisee Sudokun ja visualisoi ratkaisuprosessin.
+- [ ] Vaikeustason määrittely monipuolisemmin, kun pelkän tyhjien ruutujen lukumäärän perusteella
+- [ ] Käyttäjän luominen ja sijoitusten ylläpito verrattuna muihin käyttäjiin tulostaululla
+- [ ] Sudokun ratkaisija, joka ratkaisee Sudokun ja visualisoi ratkaisuprosessin

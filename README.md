@@ -1,6 +1,6 @@
 # Sudoku
 
-Ohjelma generoi satunnaisia Sudokuita, joiden kokoa ja vaikeustasoa voi muuttaa. Vaikeustaso muutetaan muuttamalla Sudokussa olevien tyhjien ruutujen lukumäärää. Kun Sudokun ruutuun lisätään virheellinen numero, ruudussa olevan numeron väri muuttuu punaiseksi. Lisäksi voitetuista peleistä lisätään SQLite-tietokantaan dataa, jota voi myöhemmin tarkastella taulukkomuodossa.
+Ohjelma generoi satunnaisia Sudokuita, joiden kokoa ja tyhjien ruutujen lukumäärää voi muuttaa. Kun Sudokun ruutuun lisätään virheellinen numero, numeron väri muuttuu punaiseksi. Sudokun ollessa täynnä käyttäjälle avautuu uusi ikkuna, jos ratkaisu on oikein. Lisäksi voitetuista peleistä lisätään SQLite-tietokantaan dataa, jota voi myöhemmin tarkastella taulukkomuodossa.
 
 
 ## Dokumentaatio

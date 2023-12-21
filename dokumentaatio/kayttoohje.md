@@ -42,7 +42,7 @@ Sudokun koon voi valita dropdown-valikosta. Base 3 tarkoittaa, että Sudokun siv
 
 ## Pelin tarkistus
 
-Sudoku tarkistetaan automaattisesti, kun kaikki ruudut ovat täynnä.
+Sudoku tarkistetaan automaattisesti, kun kaikki ruudut ovat täynnä. Lisäksi kun ruutuun lisätään virheellinen numero, numeron väri muuttuu punaiseksi.
 
 ## Statistiikka
 

@@ -354,7 +354,8 @@ class UI(tk.Frame):
         Handles changes to the empty cells setting.
 
         Args:
-            event (Event): Event object containing information about the change in empty cells setting.
+            event (Event): Event object containing information
+            about the change in empty cells setting.
         """
         empty_cells = 0
 
