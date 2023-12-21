@@ -8,17 +8,17 @@ from database import Database
 
 class UI(tk.Frame):
     """
-    A class representing the User Interface (UI) for the Sudoku game.
+    Class representing the User Interface (UI) for the Sudoku game.
 
     Attributes:
-        root (tk.Tk): The root window of the application.
-        sudoku (Sudoku): The Sudoku game logic.
-        database: Reference to the database object for game data storage.
+        root (tk.Tk): Root window of the application.
+        sudoku (Sudoku): Sudoku game logic.
+        database: Reference to a database object for game data storage.
         cells (dict): Dictionary of cells in the Sudoku grid.
         border_frames (list): List of frames used for boldened grid borders.
         user_resized (bool): Flag indicating whether the user has resized the window.
         resize_timer (int): Timer for resize event handling.
-        settings_window (tk.Toplevel): The settings window.
+        settings_window (tk.Toplevel): Settings window.
         stats_window: Window displaying game statistics.
     """
 
@@ -27,8 +27,9 @@ class UI(tk.Frame):
         Initializes the UI for the Sudoku game.
 
         Args:
-            root (tk.Tk): The root window of the application.
-            sudoku (Sudoku): The Sudoku game logic instance.
+            root (tk.Tk): Root window of the application.
+            sudoku (Sudoku): Sudoku game logic instance.
+            database (Database): Instance of a class that interacts with the database.
         """
         tk.Frame.__init__(self, root)
         self.root = root
@@ -45,45 +46,17 @@ class UI(tk.Frame):
         self.bind("<Configure>", self.on_window_resize)
         self.user_resized = True
 
-    def update_grid(self) -> None:
-        """
-        Refreshes the grid to reflect the current state and size of the Sudoku game.
-        """
-        self.cell_values = [
-            [
-                tk.StringVar(
-                    value=str(self.sudoku.board[row][col])
-                    if self.sudoku.board[row][col] != 0
-                    else ""
-                )
-                for col in range(self.sudoku.base**2)
-            ]
-            for row in range(self.sudoku.base**2)
-        ]
-
-        for frame in self.border_frames:
-            frame.destroy()
-
-        for cell in self.cells.values():
-            cell.destroy()
-
-        self.border_frames.clear()
-        self.cells.clear()
-        self.create_grid()
-        self.update()
-
     def create_settings(self) -> None:
         """
-        Initializes and positions UI elements such as labels, entries,
-        and buttons for configuring game settings like base size and number of empty cells.
+        Creates a settings window with additional settings for the Sudoku game.
         """
 
         def validate_empty_cells_label(p: str) -> bool:
             """
-            Validates the input for the number of empty cells in the Sudoku puzzle.
+            Validates inputs for the empty cells setting.
 
             Args:
-                p: The input value to validate.
+                p: Input value to validate.
 
             Returns:
                 bool: True if the input is valid, False otherwise.
@@ -129,8 +102,7 @@ class UI(tk.Frame):
 
     def create_menu(self) -> None:
         """
-        Sets up menu items such as 'New Sudoku' and 'Settings',
-        attaching relevant commands to these menu options.
+        Creates a main menu for the application and attaches relevant commands to the menu items.
         """
         menu_bar = tk.Menu(self.root, bg="green")
         self.root.config(menu=menu_bar)
@@ -140,16 +112,16 @@ class UI(tk.Frame):
 
     def create_grid(self) -> None:
         """
-        Sets up the visual representation of the Sudoku grid in the UI,
-        which involves creating and positioning entry widgets according to the Sudoku layout.
+        Sets up a Sudoku grid in the UI, which involves creating and
+        positioning entry widgets according to Sudoku layout.
         """
 
         def validate_entry(p: str) -> bool:
             """
-            Ensures correct input in Sudoku cells.
+            Validates inputs for Sudoku cells.
 
             Args:
-                p: The input value in a Sudoku cell to validate.
+                p: Input value to validate.
 
             Returns:
                 bool: True if the input is valid, False otherwise.
@@ -206,10 +178,37 @@ class UI(tk.Frame):
             self.grid_rowconfigure(i, weight=1 if i % 2 == 0 else 0)
             self.grid_columnconfigure(i, weight=1 if i % 2 == 0 else 0)
 
+    def update_grid(self) -> None:
+        """
+        Refreshes the grid to reflect the current state and size of the Sudoku game.
+        """
+        self.cell_values = [
+            [
+                tk.StringVar(
+                    value=str(self.sudoku.board[row][col])
+                    if self.sudoku.board[row][col] != 0
+                    else ""
+                )
+                for col in range(self.sudoku.base**2)
+            ]
+            for row in range(self.sudoku.base**2)
+        ]
+
+        for frame in self.border_frames:
+            frame.destroy()
+
+        for cell in self.cells.values():
+            cell.destroy()
+
+        self.border_frames.clear()
+        self.cells.clear()
+        self.create_grid()
+        self.update()
+
     def create_stats(self) -> None:
         """
-        Constructs a window that displays various game statistics,
-        like the games' average completion time, moves etc.
+        Creates a window that displays various game statistics,
+        such as the games' average completion time, moves etc.
         """
 
         def sort_column(tree: ttk.Treeview, col: str, reverse: bool) -> None:
@@ -255,7 +254,7 @@ class UI(tk.Frame):
 
     def open_settings(self) -> None:
         """
-        Opens the settings window for the application.
+        Opens the settings window.
         """
         if not self.settings_window or not tk.Toplevel.winfo_exists(
             self.settings_window
@@ -277,8 +276,11 @@ class UI(tk.Frame):
         """
         Handles window resize events for the application.
 
+        Actions related to window resizing are executed
+        500 milliseconds after the resizing has stopped.
+
         Args:
-            event: The event object associated with the window resize action.
+            event (Event): Event object associated with the window resize action.
         """
         if not self.user_resized:
             return
@@ -291,6 +293,9 @@ class UI(tk.Frame):
     def window_resize_action(self, event: tk.Event) -> None:
         """
         Executes actions related to window resizing, such as changing the font size of the cells.
+
+        Args:
+            event (Event): Event object associated with the window resize action.
         """
         font_size = (
             min(event.height // 15, event.width // 15) * 9 // self.sudoku.base**2
@@ -302,12 +307,13 @@ class UI(tk.Frame):
 
     def on_cell_change(self, event: tk.Event, row: int, col: int) -> None:
         """
-        Responds to changes in individual cells of the Sudoku grid.
+        Responds to changes in individual cells of the Sudoku grid
+        and handles actions such as checking if a number inserted to a cell was correct.
 
         Args:
-            _: The event object triggering the cell change.
-            row: The row index of the changed cell.
-            col: The column index of the changed cell.
+            event (Event): Event object triggering the cell change.
+            row (int): Row index of the changed cell.
+            col (int): Column index of the changed cell.
         """
         cell_value = self.cell_values[row][col].get()
 
@@ -334,7 +340,10 @@ class UI(tk.Frame):
 
     def on_base_change(self, event: tk.Event) -> None:
         """
-        Handles modifications to the base setting of the Sudoku.
+        Handles changes to the base setting.
+
+        Args:
+            event (Event): Event object containing information about the change in base setting.
         """
         base = int(event.widget.get())
         self.sudoku.set_base(base)
@@ -342,10 +351,10 @@ class UI(tk.Frame):
 
     def on_empty_cells_change(self, event: tk.Event) -> None:
         """
-        Handles changes to the number of empty cells in the Sudoku puzzle.
+        Handles changes to the empty cells setting.
 
         Args:
-            event: The event object containing information about the change in empty cells.
+            event (Event): Event object containing information about the change in empty cells setting.
         """
         empty_cells = 0
 
@@ -368,7 +377,11 @@ class UI(tk.Frame):
 
     def show_message(self, title: str, message: str) -> None:
         """
-        Presents a message dialog to the user.
+        Shows a message dialog to the user in a new window.
+
+        Args:
+            title (str): Title of the window.
+            message (str): Message to show.
         """
         dialog = tk.Toplevel(self)
         dialog.title(title)
@@ -395,10 +408,7 @@ class UI(tk.Frame):
 
     def on_generate_button_press(self, *_: tuple[Any]) -> None:
         """
-        Triggers the generation of a new Sudoku puzzle.
-
-        Args:
-            event: The event object associated with pressing the generate button.
+        Generates a new Sudoku and updates the grid to show it.
         """
         self.sudoku.set_random_sudoku()
         self.update_grid()

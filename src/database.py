@@ -3,18 +3,15 @@ import sqlite3
 
 class Database:
     """
-    Initializes the Database object, establishes a connection to the SQLite database,
-    and creates a table for storing Sudoku game records if it doesn't exist.
-
-    The table 'games' is structured with columns for game ID, time, moves, and empty cells.
+    Class that interacts with the database.
     """
 
     def __init__(self) -> None:
         """
-        Initializes the Database object, establishes a connection to the SQLite database,
+        Initializes a Database object, establishes a connection to the SQLite database,
         and creates a table for storing Sudoku game records if it doesn't exist.
 
-        The table 'games' is structured with columns for game ID, time, moves, and empty cells.
+        The table 'games' is structured with columns for ID, time, moves, and empty cells.
         """
         self.con = sqlite3.connect("data.db")
         self.cur = self.con.cursor()
@@ -28,9 +25,9 @@ class Database:
         Inserts a Sudoku game record into the database.
 
         Args:
-            seconds (int): The time of the game in seconds.
-            moves (int): The number of moves made in the game.
-            empty_cells (int): The number of empty cells in the Sudoku puzzle.
+            seconds (int): Time of the game in seconds.
+            moves (int): Number of moves made in the game.
+            empty_cells (int): Number of empty cells in the game.
 
         The method calculates the elapsed time from the start to the current time and
         formats it before storing it along with the number of moves and empty cells in the database.
@@ -69,7 +66,7 @@ class Database:
         Retrieves all game records from the database.
 
         Returns:
-            list[tuple[int, int, int, int]]: A list of tuples, each representing a game record.
+            list[tuple[int, int, int, int]]: List of tuples, each representing a game record.
             Each tuple contains the game ID, formatted time,
             number of moves, and number of empty cells.
         """
