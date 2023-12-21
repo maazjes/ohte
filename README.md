@@ -27,6 +27,7 @@ Käynnistä Ohjelma komennolla:
 poetry run invoke start
 ```
 
+Jos käytät Visual Studio Codea, niin kannattaa asentaa lisäosa "Mypy Type Checker". Mypylle on määritelty projektissa valmiiksi konfiguraatiotiedosto.
 ### Testaus
 
 Testit suoritetaan komennolla:
