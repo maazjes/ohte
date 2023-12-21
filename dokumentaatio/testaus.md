@@ -21,7 +21,7 @@ Testikattavuus on testattu Coverage-kirjaston avulla. Testauksen haaraumakattavu
 <br />
 <br />
 
-![Coverage-reportti](../assets/coverage.jpg)
+![Coverage-reportti](../assets/coverage1.jpg)
 
 ## Järjestelmätestaus
 
