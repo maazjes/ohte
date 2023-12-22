@@ -17,8 +17,6 @@ class UI(tk.Frame):
         cells: Dictionary of cells in the Sudoku grid.
         cell_values: List of cell values for reference.
         border_frames: List of frames used for boldened grid borders.
-        user_resized: Flag indicating whether the user has resized the window.
-        resize_timer: Timer for resize event handling.
         settings_window: Settings window.
         stats_window: Window displaying stats_table.
         stats_table: Table displaying game statistics.
@@ -41,17 +39,15 @@ class UI(tk.Frame):
         self.cell_values: list[list[tk.StringVar]] = []
         self.empty_cells_value = tk.StringVar(value=str(self.sudoku.empty_cells))
         self.border_frames: list[tk.Frame] = []
-        self.user_resized = False
-        self.resize_timer = ""
         self.settings_window: tk.Toplevel | None = None
         self.stats_window: tk.Toplevel | None = None
         self.stats_table: ttk.Treeview | None = None
-        root.minsize(200, 200)
+        root.minsize(100, 100)
         root.maxsize(1000, 1000)
+        root.resizable(False, False)
         root.title("Sudoku")
         self.update_grid(True)
         self.create_menu()
-        self.bind("<Configure>", self.on_window_resize)
 
     def create_settings(self) -> None:
         """
@@ -151,7 +147,7 @@ class UI(tk.Frame):
                     justify="center",
                     width=2,
                     state="normal" if self.sudoku.board[row][col] == 0 else "disabled",
-                    font=("Arial", 20),
+                    font=("Arial", 25),
                 )
                 cell.bind(
                     "<KeyPress>",
@@ -214,9 +210,7 @@ class UI(tk.Frame):
 
             self.border_frames.clear()
             self.cells.clear()
-            self.user_resized = False
             self.create_grid()
-            self.update()
         else:
             for row in range(self.sudoku.base**2):
                 for col in range(self.sudoku.base**2):
@@ -303,47 +297,6 @@ class UI(tk.Frame):
         else:
             self.stats_window.lift()
 
-    def on_window_resize(self, event: tk.Event) -> None:
-        """
-        Handles window resize events for the application.
-
-        Actions related to window resizing are executed
-        500 milliseconds after the resizing has stopped.
-
-        Args:
-            event: Event object associated with the window resize action.
-        """
-        if not self.user_resized:
-            self.user_resized = True
-            return
-
-        if self.resize_timer:
-            self.after_cancel(self.resize_timer)
-
-        self.resize_timer = self.after(500, lambda: self.window_resize_action(event))
-
-    def window_resize_action(self, _: tk.Event) -> None:
-        """
-        Executes actions related to window resizing, such as changing the font size of the cells.
-
-        Args:
-            event: Event object associated with the window resize action.
-        """
-        for row in range(self.sudoku.base**2):
-            for col in range(self.sudoku.base**2):
-                cell = self.cells[(row, col)]
-
-                # Get the current size of the entry
-                entry_width = cell.winfo_width()
-                entry_height = cell.winfo_height()
-
-                # Calculate the font size based on the size of the entry
-                # This is a simplistic calculation; you might need to adjust it
-                font_size = min(entry_width, entry_height) // 2
-
-                # Set the new font size
-                cell.config(font=("Arial", font_size))
-
     def on_cell_key_press(self, event: tk.Event, row: int, col: int) -> None:
         """
         Responds to changes in individual cells of the Sudoku grid when a key is
@@ -403,11 +356,7 @@ class UI(tk.Frame):
         """
         base = int(event.widget.get())
         self.sudoku.set_base(base)
-        self.root.destroy()
-        new_root = tk.Tk()
-        new_ui = UI(new_root, self.sudoku, self.database)
-        new_ui.pack(fill="both", expand=True)
-        new_root.mainloop()
+        self.update_grid(True)
 
     def on_empty_cells_change(self, event: tk.Event) -> None:
         """
