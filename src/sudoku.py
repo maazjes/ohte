@@ -71,7 +71,7 @@ class Sudoku:
         bad_rows = [
             row for row in self.board if not sum(row) == sum(set(row)) == valid_sum
         ]
-        cols: list[list[int]] = list(zip(*self.board))  # type: ignore
+        cols: list[list[int]] = list(zip(*self.board))
 
         bad_cols = [col for col in cols if not sum(col) == sum(set(col)) == valid_sum]
         squares = []
