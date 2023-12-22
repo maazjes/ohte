@@ -1,6 +1,6 @@
 # Vaatimusmäärittely
 
-Ohjelma generoi satunnaisia Sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero. Käyttäjä voi myös vaihtaa generoitavien Sudokujen kokoa ja tyhjien ruutujen lukumäärää. Kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen määräksi 90. Pelatut pelit tallennetaan SQLite-tietokantaan, mikä mahdollistaa pelitietojen myöhemmän tarkastelun.
+Ohjelma generoi satunnaisia Sudokuita, joita käyttäjä voi ratkaista. Ratkaisu tarkistetaan, kun kaikkiin ruutuihin on lisätty numero. Käyttäjä voi myös vaihtaa generoitavien Sudokujen kokoa ja tyhjien ruutujen lukumäärää. Kaikki syötteet käyttöliittymään validoidaan. Käyttäjän ei ole esimerkiksi mahdollista lisätä 9x9 Sudokuun lukua 10 eikä merkata tyhjien ruutujen lukumääräksi 90. Pelatut pelit tallennetaan SQLite-tietokantaan, mikä mahdollistaa pelitietojen myöhemmän tarkastelun.
 
 ## Toiminnallisuudet
 
