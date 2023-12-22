@@ -15,6 +15,7 @@ class UI(tk.Frame):
         sudoku: Sudoku game logic.
         database: Reference to a database object for game data storage.
         cells: Dictionary of cells in the Sudoku grid.
+        cell_values: List of cell values for reference.
         border_frames: List of frames used for boldened grid borders.
         user_resized: Flag indicating whether the user has resized the window.
         resize_timer: Timer for resize event handling.
@@ -37,16 +38,20 @@ class UI(tk.Frame):
         self.sudoku = sudoku
         self.database = database
         self.cells: dict[tuple[int, int], tk.Entry] = {}
+        self.cell_values: list[list[tk.StringVar]] = []
+        self.empty_cells_value = tk.StringVar(value=str(self.sudoku.empty_cells))
         self.border_frames: list[tk.Frame] = []
         self.user_resized = False
         self.resize_timer = ""
         self.settings_window: tk.Toplevel | None = None
         self.stats_window: tk.Toplevel | None = None
         self.stats_table: ttk.Treeview | None = None
+        root.minsize(200, 200)
+        root.maxsize(1000, 1000)
+        root.title("Sudoku")
         self.update_grid(True)
         self.create_menu()
         self.bind("<Configure>", self.on_window_resize)
-        self.user_resized = True
 
     def create_settings(self) -> None:
         """
@@ -72,17 +77,22 @@ class UI(tk.Frame):
 
         base_label = ttk.Label(self.settings_window, text="Base", font=("Arial", 12))
         base_label.grid(row=0, column=0, padx=5, pady=5)
-        base_options = ["2", "3", "4", "5"]
+        base_options = ["2", "3", "4"]
 
         base_combobox = ttk.Combobox(
-            self.settings_window, values=base_options, width=2, font=("Arial", 15)
+            self.settings_window,
+            values=base_options,
+            width=2,
+            font=("Arial", 15),
         )
-        base_combobox.set(3)
+        base_combobox.set(self.sudoku.base)
         base_combobox.bind("<<ComboboxSelected>>", self.on_base_change)
         base_combobox.grid(row=0, column=1, padx=5, pady=5)
 
         empty_cells_label = ttk.Label(
-            self.settings_window, text="Empty cells", font=("Arial", 12)
+            self.settings_window,
+            text="Empty cells",
+            font=("Arial", 12),
         )
         empty_cells_label.grid(row=1, column=0, padx=5, pady=5)
 
@@ -93,6 +103,7 @@ class UI(tk.Frame):
             justify="center",
             width=3,
             font=("Arial", 15),
+            textvariable=self.empty_cells_value,
         )
         empty_cells_entry.bind("<KeyRelease>", self.on_empty_cells_change)
         empty_cells_entry.grid(row=1, column=1, padx=5, pady=5)
@@ -118,19 +129,7 @@ class UI(tk.Frame):
         positioning entry widgets according to Sudoku layout.
         """
 
-        def validate_entry(p: str) -> bool:
-            """
-            Validates inputs for Sudoku cells.
-
-            Args:
-                p: Input value to validate.
-
-            Returns:
-                True if the input is valid, False otherwise.
-            """
-            return (str.isdigit(p) and 1 <= int(p) <= self.sudoku.base**2) or p == ""
-
-        vcmd = self.register(validate_entry)
+        vcmd = self.register(self.validate_cell)
         border_thickness = 2
 
         for row in range(self.sudoku.base**2):
@@ -151,8 +150,8 @@ class UI(tk.Frame):
                     validatecommand=(vcmd, "%P"),
                     justify="center",
                     width=2,
-                    font=("Arial", 25),
                     state="normal" if self.sudoku.board[row][col] == 0 else "disabled",
+                    font=("Arial", 20),
                 )
                 cell.bind(
                     "<KeyPress>",
@@ -215,6 +214,7 @@ class UI(tk.Frame):
 
             self.border_frames.clear()
             self.cells.clear()
+            self.user_resized = False
             self.create_grid()
             self.update()
         else:
@@ -314,6 +314,7 @@ class UI(tk.Frame):
             event: Event object associated with the window resize action.
         """
         if not self.user_resized:
+            self.user_resized = True
             return
 
         if self.resize_timer:
@@ -321,20 +322,27 @@ class UI(tk.Frame):
 
         self.resize_timer = self.after(500, lambda: self.window_resize_action(event))
 
-    def window_resize_action(self, event: tk.Event) -> None:
+    def window_resize_action(self, _: tk.Event) -> None:
         """
         Executes actions related to window resizing, such as changing the font size of the cells.
 
         Args:
             event: Event object associated with the window resize action.
         """
-        font_size = (
-            min(event.height // 15, event.width // 15) * 9 // self.sudoku.base**2
-        )
-
         for row in range(self.sudoku.base**2):
             for col in range(self.sudoku.base**2):
-                self.cells[(row, col)].config(font=("Arial", font_size))
+                cell = self.cells[(row, col)]
+
+                # Get the current size of the entry
+                entry_width = cell.winfo_width()
+                entry_height = cell.winfo_height()
+
+                # Calculate the font size based on the size of the entry
+                # This is a simplistic calculation; you might need to adjust it
+                font_size = min(entry_width, entry_height) // 2
+
+                # Set the new font size
+                cell.config(font=("Arial", font_size))
 
     def on_cell_key_press(self, event: tk.Event, row: int, col: int) -> None:
         """
@@ -346,16 +354,27 @@ class UI(tk.Frame):
             row: Row index of the changed cell.
             col: Column index of the changed cell.
         """
-        cell_value = event.char
-        num = 0
+        cell = self.cells[(row, col)]
+        current_value = cell.get()
+        cursor_index = cell.index(tk.INSERT)
+        selection = cell.selection_get() if cell.selection_present() else ""
 
-        if cell_value != "":
-            num = int(cell_value)
-
-        if self.sudoku.insert_number(row, col, num):
-            event.widget.config(foreground="black")
+        if selection:
+            start_index = cell.index(tk.SEL_FIRST)
+            end_index = cell.index(tk.SEL_LAST)
+            new_value = (
+                current_value[:start_index] + event.char + current_value[end_index:]
+            )
         else:
-            event.widget.config(foreground="red")
+            new_value = (
+                current_value[:cursor_index] + event.char + current_value[cursor_index:]
+            )
+
+        if self.validate_cell(new_value):
+            if self.sudoku.insert_number(row, col, int(new_value)):
+                event.widget.config(foreground="black")
+            else:
+                event.widget.config(foreground="red")
 
     def on_cell_key_release(self) -> None:
         """
@@ -384,7 +403,11 @@ class UI(tk.Frame):
         """
         base = int(event.widget.get())
         self.sudoku.set_base(base)
-        self.update_grid(True)
+        self.root.destroy()
+        new_root = tk.Tk()
+        new_ui = UI(new_root, self.sudoku, self.database)
+        new_ui.pack(fill="both", expand=True)
+        new_root.mainloop()
 
     def on_empty_cells_change(self, event: tk.Event) -> None:
         """
@@ -441,3 +464,15 @@ class UI(tk.Frame):
         """
         self.sudoku.set_random_sudoku()
         self.update_grid(False)
+
+    def validate_cell(self, p: str) -> bool:
+        """
+        Validates inputs for Sudoku cells.
+
+        Args:
+            p: Input value to validate.
+
+        Returns:
+            True if the input is valid, False otherwise.
+        """
+        return (str.isdigit(p) and 1 <= int(p) <= self.sudoku.base**2) or p == ""
