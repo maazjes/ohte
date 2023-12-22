@@ -131,16 +131,18 @@ class UI(tk.Frame):
             return (str.isdigit(p) and 1 <= int(p) <= self.sudoku.base**2) or p == ""
 
         vcmd = self.register(validate_entry)
-
         border_thickness = 2
 
         for row in range(self.sudoku.base**2):
             for col in range(self.sudoku.base**2):
 
-                def on_key_release(
+                def on_cell_key_press(
                     event: tk.Event, row: int = row, col: int = col
                 ) -> None:
-                    self.on_cell_change(event, row, col)
+                    self.on_cell_key_press(event, row, col)
+
+                def on_cell_key_release(_: tk.Event) -> None:
+                    self.on_cell_key_release()
 
                 cell = ttk.Entry(
                     self,
@@ -150,11 +152,15 @@ class UI(tk.Frame):
                     justify="center",
                     width=2,
                     font=("Arial", 25),
-                    state="normal" if self.sudoku.board[row][col] == 0 else "disable",
+                    state="normal" if self.sudoku.board[row][col] == 0 else "disabled",
+                )
+                cell.bind(
+                    "<KeyPress>",
+                    on_cell_key_press,
                 )
                 cell.bind(
                     "<KeyRelease>",
-                    on_key_release,
+                    on_cell_key_release,
                 )
                 cell.grid(row=row * 2, column=col * 2, sticky="nsew")
                 self.cells[(row, col)] = cell
@@ -221,7 +227,8 @@ class UI(tk.Frame):
                     )
                     self.cell_values[row][col].set(val)
                     self.cells[(row, col)].config(
-                        state="normal" if val == "" else "disabled"
+                        state="normal" if val == "" else "disabled",
+                        foreground="black" if val == "" else "grey",
                     )
 
     def create_stats(self) -> None:
@@ -241,8 +248,10 @@ class UI(tk.Frame):
 
         self.stats_window = tk.Toplevel(self)
         self.stats_window.title("Stats")
-        self.stats_table = ttk.Treeview(self.stats_window)
-        self.stats_table["columns"] = ("Time", "Moves", "Empty cells")
+        self.stats_table = ttk.Treeview(
+            self.stats_window,
+            columns=("Time", "Moves", "Empty cells"),
+        )
         self.stats_table.column("#0", width=0, stretch=tk.NO)
         stats_table_as_param = self.stats_table
 
@@ -327,41 +336,44 @@ class UI(tk.Frame):
             for col in range(self.sudoku.base**2):
                 self.cells[(row, col)].config(font=("Arial", font_size))
 
-    def on_cell_change(self, event: tk.Event, row: int, col: int) -> None:
+    def on_cell_key_press(self, event: tk.Event, row: int, col: int) -> None:
         """
-        Responds to changes in individual cells of the Sudoku grid
-        and handles actions such as checking if a number inserted to a cell was correct.
+        Responds to changes in individual cells of the Sudoku grid when a key is
+        pressed and notifies the user whether the number inserted was correct.
 
         Args:
             event: Event object triggering the cell change.
             row: Row index of the changed cell.
             col: Column index of the changed cell.
         """
-        cell_value = self.cell_values[row][col].get()
-        print(cell_value)
+        cell_value = event.char
         num = 0
 
         if cell_value != "":
-            num = int(self.cell_values[row][col].get())
+            num = int(cell_value)
 
         if self.sudoku.insert_number(row, col, num):
             event.widget.config(foreground="black")
-
-            if self.sudoku.validate():
-                self.show_message("Validation", "Solution is valid!")
-                seconds = int(time.time() - self.sudoku.start)
-                game = (seconds, self.sudoku.moves, self.sudoku.empty_cells)
-
-                self.database.insert_game(*game)
-                if self.stats_table:
-                    self.stats_table.insert(
-                        "",
-                        tk.END,
-                        values=game,
-                    )
-
         else:
             event.widget.config(foreground="red")
+
+    def on_cell_key_release(self) -> None:
+        """
+        Responds to changes in individual cells of the Sudoku grid when a
+        key is released and shows the user a message if the Sudoku is complete.
+        """
+        if self.sudoku.validate():
+            self.show_message("Validation", "Solution is valid!")
+            seconds = int(time.time() - self.sudoku.start)
+            game = (seconds, self.sudoku.moves, self.sudoku.empty_cells)
+
+            self.database.insert_game(*game)
+            if self.stats_table:
+                self.stats_table.insert(
+                    "",
+                    tk.END,
+                    values=game,
+                )
 
     def on_base_change(self, event: tk.Event) -> None:
         """

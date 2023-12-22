@@ -169,6 +169,7 @@ class Sudoku:
             base: Base of the Sudoku to set.
         """
         self.base = base
+        self.empty_cells = self.base**4 - self.base**3
         self.set_random_sudoku()
 
     def set_empty_cells(self, empty_cells: int) -> None:
@@ -204,7 +205,7 @@ class Sudoku:
         """
         self.board = self.generate_sudoku(self.base)
         self.original_board = copy.deepcopy(self.board)
-        self.set_empty_cells(self.base**4 - self.base**3)
+        self.set_empty_cells(self.empty_cells)
 
     def __str__(self) -> str:
         """
