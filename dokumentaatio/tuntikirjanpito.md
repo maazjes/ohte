@@ -8,5 +8,7 @@
 | 5.12. | 9 | Käyttöliittymään asetuspaneeli, josta voi vaihtaa tyhjien ruutujen määrää Sudokussa. |
 | 12.12. | 12 | Base-valinnan korjaus, väärien lukujen estämisen lisääminen, selkeämpi ruudukko, uusien Sudokuiden generoiminen painikkeella ja palaute Sudokun oikeellisuudesta |
 | 20.12. | 10 | Tietokannan implementointi, testien tekeminen, docstringin viimeistely ja dokumentaation viimeistely |
+| 21.12. | 11 | Ohjelman viimeistely ja erinäisten bugien korjaaminen. Esimerkiksi numeroiden muuttamisessa punaiseksi oli ongelmia. |
+| 22.12. | 8 | Dokumentaation, docstringin ja ohjelman viimeistely. Fontin koon muuttamisessa todella paljon ongelmia. Loppuen lopuksi poistin ominaisuuden. |
 
-Yhteensä: 46.2 tuntia
+Yhteensä: 65.2 tuntia
